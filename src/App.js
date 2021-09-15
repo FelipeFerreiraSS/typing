@@ -1,7 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import wordList from './resource/words.json'
+
+const getWord = () => {
+    const index = Math.floor(Math.random() * wordList.length)
+    const word = wordList[index]
+    return word.toLowerCase()
+}
 
 function App(){
     const [typeKeys, setTypeKeys] = useState([])
+    const [word, setWord] = useState('')
+
+    useEffect(() => {
+        setWord(getWord())
+    }, [])
+
     const handleKeyDown = (e) => {
         e.preventDefault()  
         const { key } = e
@@ -16,8 +29,8 @@ function App(){
     return(
         <div className="container" tabIndex="0" onKeyDown={handleKeyDown}>
             <div className="valid-keys">
-                <span className="matcherd">Feli</span> 
-                <span className="remainder">pe</span>
+                <span className="matcherd"></span> 
+                <span className="remainder">{word}</span>
             </div>
             <div className="type-keys">{typeKeys ? typeKeys.join(' ') : null}</div>
             <div className="completed-words">
