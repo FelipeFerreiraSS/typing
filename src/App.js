@@ -7,8 +7,23 @@ const getWord = () => {
     return word.toLowerCase()
 }
 
+const isValidKey = (key, word) => {
+    if(!word) return false
+    const result = word.split('').includes(key)
+}
+
+const Word = ({word, validKeys}) => {
+    return (
+        <>
+            <span className="matched"></span>
+            <span className="remainder">{word}</span>
+        </>
+    )
+}
+
 function App(){
     const [typeKeys, setTypeKeys] = useState([])
+    const [validKeys, setValidKeys] = useState([])
     const [word, setWord] = useState('')
 
     useEffect(() => {
@@ -23,14 +38,17 @@ function App(){
             return [...prevTypeKeys, key].slice(-30)
         })
 
+        if (isValidKey(key, word)){
+
+        }
+
         console.log(key)
     }
 
     return(
         <div className="container" tabIndex="0" onKeyDown={handleKeyDown}>
             <div className="valid-keys">
-                <span className="matcherd"></span> 
-                <span className="remainder">{word}</span>
+                <Word word={word} validKeys={validKeys}/>
             </div>
             <div className="type-keys">{typeKeys ? typeKeys.join(' ') : null}</div>
             <div className="completed-words">
