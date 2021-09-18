@@ -83,9 +83,6 @@ function App(){
                             <li key={word}>{word}</li>
                         )
                     })}
-                    <li>casa</li>
-                    <li>carro</li>
-                    <li>laranja</li>
                 </ol>
             </div>
         </div>
