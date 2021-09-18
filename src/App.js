@@ -39,7 +39,7 @@ function App(){
 
     useEffect(() => {
         const wordFromValidKeys = validKeys.join('').toLowerCase()
-        if(word === wordFromValidKeys) {
+        if(word && word === wordFromValidKeys) {
             let newWord = null
             do {
                 newWord = getWord()
@@ -78,6 +78,11 @@ function App(){
             <div className="type-keys">{typeKeys ? typeKeys.join(' ') : null}</div>
             <div className="completed-words">
                 <ol>
+                    {completedWords.map((word) => {
+                        return(
+                            <li key={word}>{word}</li>
+                        )
+                    })}
                     <li>casa</li>
                     <li>carro</li>
                     <li>laranja</li>
