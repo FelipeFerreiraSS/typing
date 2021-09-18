@@ -30,11 +30,26 @@ const Word = ({word, validKeys}) => {
 function App(){
     const [typeKeys, setTypeKeys] = useState([])
     const [validKeys, setValidKeys] = useState([])
+    const [completedWords, setCompletedWords] = useState([])
     const [word, setWord] = useState('')
 
     useEffect(() => {
         setWord(getWord())
     }, [])
+
+    useEffect(() => {
+        const wordFromValidKeys = validKeys.join('').toLowerCase()
+        if(word === wordFromValidKeys) {
+            let newWord = null
+            do {
+                newWord = getWord()
+            } while(completedWords.includes(newWord))
+
+            setWord(newWord)
+            setValidKeys([])
+            setCompletedWords((prev) => [...prev, word])
+        }
+    }, [word, validKeys])
 
     const handleKeyDown = (e) => {
         e.preventDefault()  
